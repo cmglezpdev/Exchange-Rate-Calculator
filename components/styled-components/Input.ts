@@ -10,5 +10,6 @@ export const StyledInput = styled.input`
 
     &:focus {
         outline: none;
+        border: 1px solid #0cf;
     }
 `

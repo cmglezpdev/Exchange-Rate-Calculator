@@ -8,19 +8,17 @@ export const StyledIcon = styled.div`
     margin: auto;
     margin-bottom: 0;
     border-radius: 100%;
-    border: 1px solid #ccc;
-    background-color: #eee;
+    border: 1px solid #bbb;
+    background-color: #f1f1f1;
+    box-shadow: 0 0 4px 4px #eee;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &:hover {
-        cursor: pointer;
-        background-color: aqua;
-    }
+    cursor: pointer;
 
     & > svg {
         font-size: 40px;
+        color: #123958;
     }
 `;

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 
 export const StyledDropdown = styled.div`
+    cursor: default;
+
     & > div {   
         width: 100%;
         border: 1px solid #ccc;
@@ -29,6 +31,10 @@ export const StyledDropdown = styled.div`
         width: 100%;
         padding: 15px 10px;
         background-color: #fff;
+    }
+
+    & > ul > li > span:first-child {
+        font-weight: bold;
     }
 
     &:hover > ul > li:hover {

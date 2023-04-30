@@ -18,7 +18,9 @@ export const Dropdown:FC<Props> = ({ value, changeValue }) => {
                         key={symbol}
                         onClick={() => changeValue(symbol)}
                     >
-                    {`${symbol} - ${currencies[symbol]}`}</li>
+                        <span>{`${symbol} - `}</span>
+                        <span>{`${currencies[symbol]}`}</span>
+                    </li>
                 ))
             }</ul>
         </StyledDropdown>
