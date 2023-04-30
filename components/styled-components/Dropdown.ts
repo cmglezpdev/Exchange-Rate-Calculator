@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const StyledDropdown = styled.div`
-    & > div {
+    & > div {   
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -16,6 +16,8 @@ export const StyledDropdown = styled.div`
         position: absolute;
         list-style: none;
         width: 190px;
+        overflow-y: scroll;
+        max-height: 300px;
     }
 
     &:hover > ul {
