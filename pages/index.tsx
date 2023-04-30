@@ -8,6 +8,8 @@ import {
   StyledInput
 } from '@/components/styled-components';
 import { ConvertResult } from '@/interfaces';
+import { ConvertResultAPI, Query } from '../interfaces/currencies';
+import { formatNumber } from '@/helpers';
 
 
 export default function Home() {
@@ -19,7 +21,6 @@ export default function Home() {
 
   const [result, setResult] = useState<ConvertResult>({
     currencyFrom: "USD", currencyTo: "USD",
-    oneFromTo: "1", oneToFrom: "1",
     amount: "0", result: "0"
   })
 
@@ -48,28 +49,40 @@ export default function Home() {
     setAmount(formatNumber(value));
   }
 
-  const formatNumber = (number: string) : string => {
-    const value = number.replaceAll(",", "");
-    const n = value.length;
-    let pointIndex = value.split("").findIndex(c => c === ".");
-    pointIndex = pointIndex === -1 ? n : pointIndex;
-    let newvalue = "";
-
-    for(let i = pointIndex; i < n; i ++) newvalue += value[i];
-    for(let j = 0, i = pointIndex - 1; i >= 0; i --, j ++) {
-      newvalue = value[i] + ((j !== 0 && (j%3) === 0) ? "," : "") + newvalue;
-    }
-
-    return newvalue;
-  }
-
   const onSwap = (from: string, to: string) => {
     setFrom(to); setTo(from);
   }
 
   const onConvert = () => {
+    if( amount === "" ) return;
     setShowLoader(true);
-    setTimeout(() => setShowLoader(false), 3000);
+
+    const myHeaders = new Headers();
+    myHeaders.append("apikey", "zoeeVK6uPi34N8S7Uthxe95eiZeogcPo");
+
+    const requestOptions : any = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders
+    };
+
+    fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount.replaceAll(",", "")}`, requestOptions)
+      .then(response => response.json())
+      .then((response:ConvertResultAPI) =>{
+        const { query, result, success } = response;
+        const { amount, from, to } = query;
+      
+        setResult({
+          amount: formatNumber(amount.toString()),
+          currencyFrom: from,
+          currencyTo: to,
+          result: formatNumber(result.toString()),
+        });
+      })
+      .catch(error => console.log('error', error))
+      .finally(() => setShowLoader(false));
+
+    // setTimeout(() => setShowLoader(false), 3000);
   }
 
   return (
