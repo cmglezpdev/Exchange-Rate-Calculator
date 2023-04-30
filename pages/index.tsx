@@ -1,20 +1,27 @@
 import { ChangeEvent, useState } from 'react';
 
 import { AppLayout } from '@/layouts';
-import { Dropdown, ShowResult } from '@/components';
+import { Dropdown, Loader, ShowResult } from '@/components';
 import { 
   StyledButton, StyledContainer, 
   StyledLabel, StyledIcon, StyledGrid, 
   StyledInput
 } from '@/components/styled-components';
-
+import { ConvertResult } from '@/interfaces';
 
 
 export default function Home() {
 
+  const [showLoader, setShowLoader] = useState<boolean>(false);
   const [amount, setAmount] = useState<string>("");
   const [from, setFrom] = useState<string>("USD");
   const [to, setTo] = useState<string>("USD");
+
+  const [result, setResult] = useState<ConvertResult>({
+    currencyFrom: "USD", currencyTo: "USD",
+    oneFromTo: "1", oneToFrom: "1",
+    amount: "0", result: "0"
+  })
 
   const isNumber = (number: string): boolean => {
     return number.split("").reduce((pv, c) => {
@@ -41,7 +48,6 @@ export default function Home() {
     setAmount(formatNumber(value));
   }
 
-
   const formatNumber = (number: string) : string => {
     const value = number.replaceAll(",", "");
     const n = value.length;
@@ -57,9 +63,13 @@ export default function Home() {
     return newvalue;
   }
 
-
   const onSwap = (from: string, to: string) => {
     setFrom(to); setTo(from);
+  }
+
+  const onConvert = () => {
+    setShowLoader(true);
+    setTimeout(() => setShowLoader(false), 3000);
   }
 
   return (
@@ -73,6 +83,7 @@ export default function Home() {
             onChange={onCheck}
             value={amount}
             autoComplete='off'
+            placeholder='0'
           />
         </div> 
 
@@ -95,10 +106,10 @@ export default function Home() {
 
         </StyledGrid>
 
-        <StyledButton>Convert</StyledButton>
+        <StyledButton onClick={onConvert}>Convert</StyledButton>
 
-        <ShowResult />
-
+        { showLoader ? <Loader /> : <ShowResult result={result} /> }
+  
       </StyledContainer>
     </AppLayout>
   )

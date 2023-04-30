@@ -1,15 +1,22 @@
-
+import { FC } from 'react';
 import { StyledResult } from '@/components/styled-components';
+import { ConvertResult } from '@/interfaces';
 
-export const ShowResult = () => {
+interface Props {
+    result: ConvertResult;
+}
+
+export const ShowResult:FC<Props> = ({ result : answer }) => {
+
+    const { result, oneToFrom, oneFromTo, currencyFrom, currencyTo } = answer;
+
     return (
         <StyledResult>
             <span>Result</span>
-            <span>45,784.475843737 USD</span>
+            <span>{ `${result} ${currencyTo}` }</span>
             <div>
-                <span>1 USD = 180 CUP</span>
-                <span>1 CUP = 0.000006 CUP</span>
-                <span></span>
+                <span>{`1 ${currencyFrom} = ${oneFromTo} ${currencyTo}`}</span>
+                <span>{`1 ${currencyTo} = ${oneToFrom} ${currencyFrom}`}</span>
             </div>
         </StyledResult>
     )

@@ -7,6 +7,7 @@ export const StyledResult = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 200px;
     
     & span {
         font-size: 18px;
