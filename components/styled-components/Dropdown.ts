@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const StyledDropdown = styled.div`
     & > div {
         width: 100%;
-        border: 1px solid #000;
+        border: 1px solid #ccc;
         border-radius: 5px;
         padding: 15px 10px;
         font-weight: bold;
@@ -25,9 +25,6 @@ export const StyledDropdown = styled.div`
     & > ul > li {
         width: 100%;
         padding: 15px 10px;
-        border-left: 1px solid #000;
-        border-right: 1px solid #000;
-        border-bottom: 1px solid #000;
         background-color: #fff;
     }
 
