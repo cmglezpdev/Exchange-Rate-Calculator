@@ -13,6 +13,8 @@ import {
 export default function Home() {
 
   const [amount, setAmount] = useState<string>("");
+  const [from, setFrom] = useState<string>("USD");
+  const [to, setTo] = useState<string>("USD");
 
   const isNumber = (number: string): boolean => {
     return number.split("").reduce((pv, c) => {
@@ -55,6 +57,11 @@ export default function Home() {
     return newvalue;
   }
 
+
+  const onSwap = (from: string, to: string) => {
+    setFrom(to); setTo(from);
+  }
+
   return (
     <AppLayout>
       <StyledContainer>
@@ -72,10 +79,10 @@ export default function Home() {
         <StyledGrid>
           <div>
             <StyledLabel>From</StyledLabel>
-              <Dropdown />
+              <Dropdown value={from} changeValue={setFrom} />
           </div>
           
-          <StyledIcon>
+          <StyledIcon onClick={() => onSwap(from, to)}>
             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
             </svg>
@@ -83,7 +90,7 @@ export default function Home() {
 
           <div>
             <StyledLabel htmlFor='from'>To</StyledLabel>
-            <Dropdown />
+            <Dropdown value={to} changeValue={setTo} />
           </div>
 
         </StyledGrid>

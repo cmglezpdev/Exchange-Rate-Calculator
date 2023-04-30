@@ -18,6 +18,7 @@ export const StyledDropdown = styled.div`
         width: 190px;
         overflow-y: scroll;
         max-height: 300px;
+        cursor: default;
     }
 
     &:hover > ul {
