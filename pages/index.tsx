@@ -1,49 +1,43 @@
-import styles from '@/styles/Home.module.css'
-import { AppLayout } from '@/layouts'
+import { AppLayout } from '@/layouts';
 import { 
-  Button, Container, Dropdown, 
-  Label, Option, Icon, Grid, 
-  Input 
-} from '@/components/styled-components'
+  StyledButton, StyledContainer, 
+  StyledLabel, StyledIcon, StyledGrid, 
+  StyledInput 
+} from '@/components/styled-components';
+import { Dropdown } from '@/components/Dropdown';
 
 
 
 export default function Home() {
   return (
     <AppLayout>
-      <Container>
+      <StyledContainer>
         <div>
-          <Label htmlFor="amount">Amount</Label>
-          <Input type="text" name='amount' />
+          <StyledLabel htmlFor="amount">Amount</StyledLabel>
+          <StyledInput type="text" name='amount' />
         </div> 
 
-        <Grid>
+        <StyledGrid>
           <div>
-            <Label htmlFor='from'>From:</Label>
-            <Dropdown name='from'>
-              <Option>HOLA</Option>
-              <Option>MUNDO</Option>
-            </Dropdown>
+            <StyledLabel>From</StyledLabel>
+              <Dropdown />
           </div>
           
-          <Icon>
+          <StyledIcon>
             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
             </svg>
-          </Icon>
+          </StyledIcon>
 
           <div>
-            <Label htmlFor='from' className={styles.label}>To:</Label>
-            <Dropdown name='from'>
-              <Option>HOLA</Option>
-              <Option>MUNDO</Option>
-            </Dropdown>
+            <StyledLabel htmlFor='from'>To</StyledLabel>
+            <Dropdown />
           </div>
 
-        </Grid>
+        </StyledGrid>
 
-        <Button type='submit'>Convert</Button>
-      </Container>
+        <StyledButton type='submit'>Convert</StyledButton>
+      </StyledContainer>
     </AppLayout>
   )
 }

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
-    font-size: 20px;  
+export const StyledLabel = styled.label`
+    font-size: 22px;  
     display: block;
-    margin-left: 5px;
+    padding-left: 10px;
     margin: 5px 0;
 `;
