@@ -1,20 +1,72 @@
+import { ChangeEvent, useState } from 'react';
+
 import { AppLayout } from '@/layouts';
+import { Dropdown, ShowResult } from '@/components';
 import { 
   StyledButton, StyledContainer, 
   StyledLabel, StyledIcon, StyledGrid, 
-  StyledInput, StyledResult
+  StyledInput
 } from '@/components/styled-components';
-import { Dropdown, ShowResult } from '@/components';
 
 
 
 export default function Home() {
+
+  const [amount, setAmount] = useState<string>("");
+
+  const isNumber = (number: string): boolean => {
+    return number.split("").reduce((pv, c) => {
+      const code = c.charCodeAt(0) - "0".charCodeAt(0);
+      return (pv && code  >= 0 && code  <= 9);
+    }, true);
+  }
+
+  const onCheck = (e : ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    let value = e.target.value;
+    let n = value.length;
+    if( value === "" ) {
+      setAmount("");
+      return;
+    }
+
+    const char = value[n - 1];
+    if( !isNumber(char) && char !== "." ) return;
+    // see if it have a point
+    const pointIndex = value.split("").findIndex(c => c === ".");
+    if( char === "." && pointIndex !== n - 1 ) return;
+    
+    setAmount(formatNumber(value));
+  }
+
+
+  const formatNumber = (number: string) : string => {
+    const value = number.replaceAll(",", "");
+    const n = value.length;
+    let pointIndex = value.split("").findIndex(c => c === ".");
+    pointIndex = pointIndex === -1 ? n : pointIndex;
+    let newvalue = "";
+
+    for(let i = pointIndex; i < n; i ++) newvalue += value[i];
+    for(let j = 0, i = pointIndex - 1; i >= 0; i --, j ++) {
+      newvalue = value[i] + ((j !== 0 && (j%3) === 0) ? "," : "") + newvalue;
+    }
+
+    return newvalue;
+  }
+
   return (
     <AppLayout>
       <StyledContainer>
         <div>
           <StyledLabel htmlFor="amount">Amount</StyledLabel>
-          <StyledInput type="text" name='amount' />
+          <StyledInput
+            type="text"
+            name='amount'
+            onChange={onCheck}
+            value={amount}
+            autoComplete='off'
+          />
         </div> 
 
         <StyledGrid>
@@ -36,7 +88,7 @@ export default function Home() {
 
         </StyledGrid>
 
-        <StyledButton type='submit'>Convert</StyledButton>
+        <StyledButton>Convert</StyledButton>
 
         <ShowResult />
 
