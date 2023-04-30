@@ -2,9 +2,9 @@ import { AppLayout } from '@/layouts';
 import { 
   StyledButton, StyledContainer, 
   StyledLabel, StyledIcon, StyledGrid, 
-  StyledInput 
+  StyledInput, StyledResult
 } from '@/components/styled-components';
-import { Dropdown } from '@/components/Dropdown';
+import { Dropdown, ShowResult } from '@/components';
 
 
 
@@ -37,6 +37,9 @@ export default function Home() {
         </StyledGrid>
 
         <StyledButton type='submit'>Convert</StyledButton>
+
+        <ShowResult />
+
       </StyledContainer>
     </AppLayout>
   )
