@@ -23,10 +23,6 @@ export const StyledDropdown = styled.div`
         cursor: default;
     }
 
-    &:hover > ul {
-        display: block;
-    }
-
     & > ul > li {
         width: 100%;
         padding: 15px 10px;
