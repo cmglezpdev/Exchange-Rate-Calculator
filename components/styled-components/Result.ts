@@ -15,7 +15,7 @@ export const StyledResult = styled.div`
     }
 
     & > span {
-        font-size: 20px;
+        font-size: 30px;
         font-weight: bold;
     }
     
