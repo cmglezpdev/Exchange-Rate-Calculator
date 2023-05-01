@@ -1,2 +1,2 @@
 export * from './currencies';
-export * from './ConvertResult';
+export * from './convert';
