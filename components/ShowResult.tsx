@@ -9,6 +9,28 @@ interface Props {
 
 export const ShowResult:FC<Props> = ({ result : answer }) => {
 
+    const { amount, result } = answer;
+
+    return (
+        <StyledResult>
+            <span>Result</span>
+            { 
+                amount === "0" || result === "0" 
+                ? (<NotInformation />)
+                : (<ConvertData result={answer} />)
+            }
+        </StyledResult>
+    )
+}
+
+const NotInformation = () => {
+    return (
+        <span>No Data yet</span>
+    )
+}
+
+const ConvertData:FC<Props> = ({ result: answer }) => {
+
     const { amount, result, currencyFrom, currencyTo } = answer;
 
     const oneFromTo = (): string => {
@@ -24,13 +46,12 @@ export const ShowResult:FC<Props> = ({ result : answer }) => {
     }
 
     return (
-        <StyledResult>
-            <span>Result</span>
+        <>
             <span>{ `${result} ${currencyTo}` }</span>
             <div>
                 <span>{`1 ${currencyFrom} = ${oneFromTo()} ${currencyTo}`}</span>
                 <span>{`1 ${currencyTo} = ${oneToFrom()} ${currencyFrom}`}</span>
             </div>
-        </StyledResult>
+        </>
     )
 }

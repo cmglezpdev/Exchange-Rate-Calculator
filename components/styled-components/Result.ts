@@ -8,19 +8,21 @@ export const StyledResult = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 200px;
+    color: #121212;
     
     & span {
         font-size: 18px;
     }
 
-    & >span {
+    & > span {
         font-size: 20px;
         font-weight: bold;
     }
-
+    
     & > span + span {
         font-size: 30px;
         margin: 10px auto;
+        color: #0526df;
     }
 
     & > div {
@@ -28,5 +30,6 @@ export const StyledResult = styled.div`
         flex-direction: column;
         align-items: center;
         margin-top: 10px;
+        font-weight: 600;
     }
 `;

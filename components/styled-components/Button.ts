@@ -6,12 +6,12 @@ export const StyledButton = styled.button`
     font-size: 20px;
     font-weight: bold;
     border: none;
-    background-color: #FF3D00;
+    background-color: #0026ff;
     color: #fff;
     margin-top: 40px;
     transition: all .1s ease-in;
 
     &:hover {
-        background-color: #E93B06;
+        background-color: #0526df;
     }
 `;

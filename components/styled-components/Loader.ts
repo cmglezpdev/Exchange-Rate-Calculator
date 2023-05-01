@@ -14,7 +14,7 @@ export const StyledLoader = styled.div`
         height: 20px;
         position: relative;
         border-radius: 50%;
-        color: #FF3D00;
+        color: #0526df;
         animation: fill 1s ease-in infinite alternate;
     }
     

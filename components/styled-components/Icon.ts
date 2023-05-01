@@ -19,6 +19,6 @@ export const StyledIcon = styled.div`
 
     & > svg {
         font-size: 40px;
-        color: #123958;
+        color: #03213a;
     }
 `;

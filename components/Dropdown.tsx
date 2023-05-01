@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { StyledDropdown } from "./styled-components"
 
 import { currencies } from '@/data';
@@ -25,10 +25,8 @@ export const Dropdown:FC<Props> = ({ value, changeValue }) => {
 
     }, [])
     
-    const handleClickOption = useCallback((symbol: string) => {
-        changeValue(symbol); setOpen(false);
-    }, [changeValue]);
-    
+    useEffect(() => setOpen(false), [value]);
+
     return (
         <StyledDropdown ref={dropdownRef} onClick={() => setOpen(true)}>
             <div ref={valueRef}>{ value }</div>
@@ -36,7 +34,7 @@ export const Dropdown:FC<Props> = ({ value, changeValue }) => {
                 Object.keys(currencies).sort().map(symbol => (
                     <li 
                         key={symbol}
-                        onClick={() => handleClickOption(symbol)}
+                        onClick={() => changeValue(symbol)}
                     >
                         <span>{`${symbol} - `}</span>
                         <span>{`${currencies[symbol]}`}</span>
