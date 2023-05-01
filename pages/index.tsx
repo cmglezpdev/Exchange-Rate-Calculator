@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import axios from 'axios';
 
 import { AppLayout } from '@/layouts';
 import { Dropdown, Loader, ShowResult } from '@/components';
@@ -7,8 +8,7 @@ import {
   StyledLabel, StyledIcon, StyledGrid, 
   StyledInput
 } from '@/components/styled-components';
-import { ConvertResult } from '@/interfaces';
-import { ConvertResultAPI, Query } from '../interfaces/currencies';
+import { ConvertResult, ConvertResponseAPI } from '@/interfaces';
 import { formatNumber } from '@/helpers';
 
 
@@ -53,35 +53,30 @@ export default function Home() {
     setFrom(to); setTo(from);
   }
 
-  const onConvert = () => {
+  const onConvert = async () => {
     if( amount === "" ) return;
     setShowLoader(true);
 
-    const myHeaders = new Headers();
-    myHeaders.append("apikey", "zoeeVK6uPi34N8S7Uthxe95eiZeogcPo");
+    try {
+      const link = `api/convert?from=${from}&to=${to}&amount=${amount.replaceAll(",", "")}`;
 
-    const requestOptions : any = {
-      method: 'GET',
-      redirect: 'follow',
-      headers: myHeaders
-    };
+      const response: Response = await fetch(link, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const converted: ConvertResponseAPI = await response.json();
 
-    fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount.replaceAll(",", "")}`, requestOptions)
-      .then(response => response.json())
-      .then((response:ConvertResultAPI) =>{
-        const { query, result, success } = response;
-        const { amount, from, to } = query;
-      
-        setResult({
-          amount: formatNumber(amount.toString()),
-          currencyFrom: from,
-          currencyTo: to,
-          result: formatNumber(result.toString()),
-        });
-      })
-      .catch(error => console.log('error', error))
-      .finally(() => setShowLoader(false));
+      setResult({
+        currencyFrom: from, currencyTo: to,
+        result: formatNumber(`${converted.result}`),
+        amount,
+      });
 
+    } catch (error:any) {
+        console.log(error.message);
+    }
+
+    setShowLoader(false);
     // setTimeout(() => setShowLoader(false), 3000);
   }
 
