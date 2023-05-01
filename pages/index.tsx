@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import axios from 'axios';
 
 import { AppLayout } from '@/layouts';
 import { Dropdown, Loader, ShowResult } from '@/components';
