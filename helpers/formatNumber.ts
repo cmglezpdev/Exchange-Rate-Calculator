@@ -1,5 +1,6 @@
 
 export const formatNumber = (number: string, roundDecimal?: number) : string => {
+    if( !number ) return "";
     const value = number.replaceAll(",", "");
     const n = value.length;
     let pointIndex = value.split("").findIndex(c => c === ".");
