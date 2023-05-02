@@ -1,29 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CacheInfo, ConvertResponseAPI } from '@/interfaces';
 import axios from 'axios';
+import { CacheInfo, ConvertResponseAPI, ResultApiLAyerToConvert } from '@/interfaces';
+import { CacheManager } from './cache'
 
 type Data = 
   | { message: string }
   | ConvertResponseAPI
 
-// response of the api to convert currencies
-interface ResultAPI {
-  // ...
-
-  info : {
-    rate: number;
-    timestamp: number;
-  };
-
-  query: {
-    amount: number;
-    from:   string;
-    to:     string;
-  };
-
-  result:     number;
-  // ...
-}
 
 export default function handler(req:NextApiRequest, res:NextApiResponse<Data>) {
   switch( req.method ) {
@@ -44,8 +27,10 @@ const convert = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
   if( !reqAmount ) return res.status(400).json({ message: "The amount to convert not found." }) 
   if( !parseFloat(reqAmount.replaceAll(",", "")) ) return res.status(400).json({ message: "The amount must be greater than 0." }) 
 
-  let appHost = process.env.HOST;
-  const { data: pairCached } = await axios.get<CacheInfo>(`${appHost}/api/cache?from=${reqFrom}&to=${reqTo}`);
+  // const serverUrl = process.env.SERVER_URL || 'http://localhost:3000';
+  // const { data: pairCached } = await axios.get<CacheInfo>(`${serverUrl}/api/cache?from=${reqFrom}&to=${reqTo}`);
+  const cacheManager = CacheManager.getInstance();
+  const pairCached = cacheManager.getCachePair(reqFrom, reqTo);
 
   if( pairCached ) {
     const amount = parseFloat(reqAmount.replaceAll(",", ""));
@@ -60,7 +45,7 @@ const convert = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
   try {
     const link = `https://api.apilayer.com/exchangerates_data/convert?to=${reqTo}&from=${reqFrom}&amount=${reqAmount}`;
 
-    const { data: result } = await axios.get<ResultAPI>(link, {
+    const { data: result } = await axios.get<ResultApiLAyerToConvert>(link, {
       headers: { apikey: process.env.API_KEY || '' }
     })
     
@@ -72,7 +57,8 @@ const convert = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
       timestamp: Date.now()
     }
     
-    await axios.post(`${appHost}/api/cache`, pair);
+    // await axios.post(`${serverUrl}/api/cache`, pair);
+    cacheManager.setCachePair(from, to, result.info.rate);
 
     return res.status(200).json({
       from, to, amount,
