@@ -49,7 +49,7 @@ const convert = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
     const { from, to, amount } = result.query;
 
     // save in cache
-    const pair = {
+    const pair: CacheInfo = {
       to, from, rate: result.info.rate,
     }
 
