@@ -9,7 +9,7 @@ export const StyledDropdown = styled.div`
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
-        padding: 15px 10px;
+        padding: 12px 10px;
         font-weight: bold;
         font-size: 20px;
         color: #000;
@@ -20,7 +20,7 @@ export const StyledDropdown = styled.div`
         display: none;
         position: absolute;
         list-style: none;
-        width: 190px;
+        width: 165px;
         overflow-y: scroll;
         max-height: 300px;
         cursor: default;
@@ -28,7 +28,7 @@ export const StyledDropdown = styled.div`
 
     & > ul > li {
         width: 100%;
-        padding: 15px 10px;
+        padding: 12px 10px;
         background-color: #fff;
     }
 

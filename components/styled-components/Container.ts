@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.section`
-    width: 500px;
-    margin: 50px auto;
+    width: 450px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -11,5 +10,9 @@ export const StyledContainer = styled.section`
     background-color: #faf9f9;
 
     box-shadow: 0 0 7px 7px #ddd;
+
+    @media (max-width: 640px) {
+        width: 350px;
+    }
 `;
 

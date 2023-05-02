@@ -7,7 +7,7 @@ export const StyledResult = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 200px;
+    min-height: 160px;
     color: #121212;
     
     & span {
@@ -15,7 +15,7 @@ export const StyledResult = styled.div`
     }
 
     & > span {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
     }
     
@@ -34,8 +34,20 @@ export const StyledResult = styled.div`
     }
 
     & > div.convert-result > span:first-child {
-        font-size: 35px;
+        font-size: 30px;
         font-weight: bold;
         color: #0526df;
+    }
+
+    @media (max-width: 640px) {
+        &  span.no-data-yet, & > div.convert-result > span:first-child {
+            font-size: 25px;
+        }
+
+        & > div.convert-result > div span {
+            font-size: 16px;
+        }
+
+
     }
 `;

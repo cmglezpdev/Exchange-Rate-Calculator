@@ -21,4 +21,10 @@ export const StyledIcon = styled.div`
         font-size: 40px;
         color: #03213a;
     }
+
+    @media (max-width: 640px) {
+        & > svg {
+            transform: rotate(90deg);
+        }
+    }
 `;

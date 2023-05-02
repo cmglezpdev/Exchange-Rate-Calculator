@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-    padding: 15px;
+    padding: 12px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     border: none;
     background-color: #0026ff;
     color: #fff;
-    margin-top: 40px;
+    margin-top: 30px;
     transition: all .1s ease-in;
 
     &:hover {
