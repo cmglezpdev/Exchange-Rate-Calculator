@@ -34,7 +34,7 @@ export default function Home() {
     }
 
     const char = value[n - 1];
-    if( !isNaN(Number(char)) && char !== "." ) return;
+    if( isNaN(Number(char)) && char !== "." ) return;
     // see if it have a point
     const pointIndex = value.split("").findIndex(c => c === ".");
     if( char === "." && pointIndex !== n - 1 ) return;
