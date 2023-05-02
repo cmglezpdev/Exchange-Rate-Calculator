@@ -3,7 +3,7 @@ import { StyledLoader } from '@/components/styled-components';
 
 export const Loader = () => {
     return (
-        <StyledLoader>
+        <StyledLoader data-testid='animation-loader'>
             <span></span>
         </StyledLoader>
     )

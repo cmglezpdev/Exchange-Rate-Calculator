@@ -23,14 +23,8 @@ export default function Home() {
     amount: "0", result: "0"
   })
 
-  const isNumber = (number: string): boolean => {
-    return number.split("").reduce((pv, c) => {
-      const code = c.charCodeAt(0) - "0".charCodeAt(0);
-      return (pv && code  >= 0 && code  <= 9);
-    }, true);
-  }
 
-  const onCheck = (e : ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e : ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     let value = e.target.value;
     let n = value.length;
@@ -40,7 +34,7 @@ export default function Home() {
     }
 
     const char = value[n - 1];
-    if( !isNumber(char) && char !== "." ) return;
+    if( !isNaN(Number(char)) && char !== "." ) return;
     // see if it have a point
     const pointIndex = value.split("").findIndex(c => c === ".");
     if( char === "." && pointIndex !== n - 1 ) return;
@@ -72,11 +66,11 @@ export default function Home() {
       });
 
     } catch (error:any) {
-        console.log(error.message);
+      console.log(error.message);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setShowLoader(false);
     }
-
-    setShowLoader(false);
-    // setTimeout(() => setShowLoader(false), 3000);
   }
 
   return (
@@ -87,20 +81,21 @@ export default function Home() {
           <StyledInput
             type="text"
             name='amount'
-            onChange={onCheck}
+            onChange={onChange}
             value={amount}
             autoComplete='off'
             placeholder='0'
+            data-testid='input-amount'
           />
         </div> 
 
         <StyledGrid>
           <div>
             <StyledLabel>From</StyledLabel>
-              <Dropdown value={from} changeValue={setFrom} />
+              <Dropdown value={from} changeValue={setFrom} data-testid='from-dropdown' />
           </div>
           
-          <StyledIcon onClick={() => onSwap(from, to)}>
+          <StyledIcon onClick={() => onSwap(from, to)} data-testid='swap-button'>
             <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
             </svg>
@@ -108,7 +103,7 @@ export default function Home() {
 
           <div>
             <StyledLabel htmlFor='from'>To</StyledLabel>
-            <Dropdown value={to} changeValue={setTo} />
+            <Dropdown value={to} changeValue={setTo} data-testid='to-dropdown' />
           </div>
 
         </StyledGrid>

@@ -12,7 +12,7 @@ export const ShowResult:FC<Props> = ({ result : answer }) => {
     const { amount, result } = answer;
 
     return (
-        <StyledResult>
+        <StyledResult data-testid="result-zone">
             <span>Result</span>
             { 
                 amount === "0" || result === "0" 
@@ -46,12 +46,12 @@ const ConvertData:FC<Props> = ({ result: answer }) => {
     }
 
     return (
-        <>
+        <div data-testid='result'>
             <span>{ `${result} ${currencyTo}` }</span>
             <div>
                 <span>{`1 ${currencyFrom} = ${oneFromTo()} ${currencyTo}`}</span>
                 <span>{`1 ${currencyTo} = ${oneToFrom()} ${currencyFrom}`}</span>
             </div>
-        </>
+        </div>
     )
 }
