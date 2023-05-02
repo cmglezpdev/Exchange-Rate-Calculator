@@ -31,3 +31,5 @@ yarn test # npm run test
 * `CACHE_TIME`: Lifespan of the date in the cache in minutes. The default value is _10_.
 
 * `SERVER_URL`: URL of the server. The default value is _http://localhost:3000_
+
+* `REDIS_URL`: URL of the redis service(UpStash, ...)
