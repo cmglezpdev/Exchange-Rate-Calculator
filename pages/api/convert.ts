@@ -65,7 +65,8 @@ const convert = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
       result: result.result
     });
 
-  } catch ( { message }:any ) {
-      return res.status(400).json({ message });
+  } catch ( error:any ) {
+      console.log(error);
+      return res.status(500).json({ message: "Internal server error. See server logs" });
   }
 }
