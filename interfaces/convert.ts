@@ -13,3 +13,23 @@ export interface ConvertResponseAPI {
     amount: number, 
     result: number
 }
+
+
+
+export interface ResultApiLAyerToConvert {
+    // ...
+  
+    info : {
+      rate: number;
+      timestamp: number;
+    };
+  
+    query: {
+      amount: number;
+      from:   string;
+      to:     string;
+    };
+  
+    result:     number;
+    // ...
+  }
