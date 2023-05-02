@@ -25,7 +25,7 @@ export const ShowResult:FC<Props> = ({ result : answer }) => {
 
 const NotInformation = () => {
     return (
-        <span>No Data yet</span>
+        <span className='no-data-yet'>No Data yet</span>
     )
 }
 
@@ -46,7 +46,7 @@ const ConvertData:FC<Props> = ({ result: answer }) => {
     }
 
     return (
-        <div data-testid='result'>
+        <div data-testid='result' className='convert-result'>
             <span>{ `${result} ${currencyTo}` }</span>
             <div>
                 <span>{`1 ${currencyFrom} = ${oneFromTo()} ${currencyTo}`}</span>
