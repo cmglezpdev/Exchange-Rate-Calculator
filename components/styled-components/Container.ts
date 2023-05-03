@@ -12,7 +12,7 @@ export const StyledContainer = styled.section`
     box-shadow: 0 0 7px 7px #ddd;
 
     @media (max-width: 640px) {
-        width: 350px;
+        width: 300px;
     }
 `;
 

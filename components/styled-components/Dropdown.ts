@@ -9,7 +9,7 @@ export const StyledDropdown = styled.div`
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
-        padding: 12px 10px;
+        padding: 10px;
         font-weight: bold;
         font-size: 20px;
         color: #000;
@@ -20,15 +20,18 @@ export const StyledDropdown = styled.div`
         display: none;
         position: absolute;
         list-style: none;
+        z-index: 1;
         width: 165px;
         overflow-y: scroll;
         max-height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         cursor: default;
     }
 
     & > ul > li {
         width: 100%;
-        padding: 12px 10px;
+        padding: 10px;
         background-color: #fff;
     }
 
@@ -39,5 +42,11 @@ export const StyledDropdown = styled.div`
 
     &:hover > ul > li:hover {
         background-color: #e7e7e7;   
+    }
+
+    @media (max-width: 640px) {
+        & > ul {
+            width: 180px;
+        }
     }
 `;

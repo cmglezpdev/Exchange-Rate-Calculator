@@ -9,6 +9,7 @@ export const StyledGrid = styled.div`
     @media (max-width: 640px) {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 50px 1fr;
+        align-items: center;
 
         & div.div-from, & div.div-to {
             display: grid;

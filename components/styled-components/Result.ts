@@ -48,6 +48,8 @@ export const StyledResult = styled.div`
             font-size: 16px;
         }
 
-
+        & > div.convert-result > span:first-child {
+            font-size: 23px;
+        }
     }
 `;
